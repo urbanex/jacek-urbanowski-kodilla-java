@@ -4,6 +4,8 @@
     <bytecodeTargetLevel>
       <module name="kodilla-course_main" target="1.8" />
       <module name="kodilla-course_test" target="1.8" />
+      <module name="kodilla-testing_main" target="1.8" />
+      <module name="kodilla-testing_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
