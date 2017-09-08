@@ -7,7 +7,7 @@ public class TestingMain {
 
     public static void main(String[] args){
 
-        System.out.println("Przykład z Kodilli");
+/*      System.out.println("Przykład z Kodilli");
 
         SimpleUser simpleUser = new SimpleUser("theForumUser");
 
@@ -32,13 +32,14 @@ public class TestingMain {
 
         System.out.println();
         System.out.println("Zadanie - testowanie odejmowania:");
-        int substractResult = Calculator.substract(15,2);
+        int subtractResult = Calculator.subtract(15,2);
 
-        if (substractResult == 13) {
+        if (subtractResult == 13) {
             System.out.println("Test Passed!");
         } else {
             System.out.println("Error!");
         }
+*/
 
     }
 }
