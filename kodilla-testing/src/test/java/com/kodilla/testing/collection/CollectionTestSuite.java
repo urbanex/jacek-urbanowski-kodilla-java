@@ -3,6 +3,7 @@ package com.kodilla.testing.collection;
 import org.junit.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CollectionTestSuite {
 
@@ -29,7 +30,7 @@ public class CollectionTestSuite {
     @Test //sprawdzi czy klasa zachowuje się poprawnie gdy lista jest pusta
     public void testOddNumbersExterminatorEmptyList() {
 
-        ArrayList<Integer> input = new ArrayList<>();
+        List<Integer> input = new ArrayList<>();
         System.out.println("Testing empty list");
         Assert.assertEquals(input, OddNumbersExterminator.exterminate(input));
 
@@ -38,13 +39,13 @@ public class CollectionTestSuite {
     @Test //sprawdzi czy klasa zachowuje się poprawnie gdy lista zawiera liczby parzyste i nieparzyste
     public void testOddNumbersExterminatorNormalList() {
 
-        ArrayList<Integer> input = new ArrayList<Integer>();
+        List<Integer> input = new ArrayList<>();
         int i = 1;
         while (input.size()<10) {
             input.add(i++);
         }
 
-        ArrayList<Integer> output = new ArrayList<Integer>();
+        List<Integer> output = new ArrayList<>();
         int o = 1;
         while (output.size()<5) {
             output.add(2*o++);
