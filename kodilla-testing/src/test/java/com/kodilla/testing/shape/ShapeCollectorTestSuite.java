@@ -77,7 +77,7 @@ public class ShapeCollectorTestSuite {
         Assert.assertEquals(new Circle(3), circle);
         Assert.assertEquals(new Triangle(3, 4), triangle);
         Assert.assertEquals(new Square(4), square);
-
+        Assert.assertEquals(null, shapeCollector.getFigure(3));
     }
 
 }
