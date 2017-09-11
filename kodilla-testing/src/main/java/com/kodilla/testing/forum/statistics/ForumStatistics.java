@@ -1,12 +1,12 @@
 package com.kodilla.testing.forum.statistics;
 
 public class ForumStatistics {
-    int usersQuantity = 0;
-    int postsQuantity = 0;
-    int commentsQuantity = 0;
-    Double postsPerUser = null;
-    Double commentsPerUser = null;
-    Double commentsPerPost = null;
+    private int usersQuantity = 0;
+    private int postsQuantity = 0;
+    private int commentsQuantity = 0;
+    private Double postsPerUser = null;
+    private Double commentsPerUser = null;
+    private Double commentsPerPost = null;
 
     public void calculateAdvStatistics(Statistics statistics) {
         usersQuantity = statistics.usersNames().size();
@@ -23,7 +23,7 @@ public class ForumStatistics {
         }
     }
 
-    public void ShowStatistics() {
+    public void showStatistics() {
         System.out.println("Number of users: " + usersQuantity + "\nNumber of posts: " + postsQuantity +
                 "\nNumber of comments: " + commentsQuantity + "\nNumber of posts per user: "
                 + (postsPerUser == null ? "divinig by 0 is forbidden so such a factor doesn't exist" : postsPerUser)
@@ -33,4 +33,27 @@ public class ForumStatistics {
                 + (commentsPerPost == null ? "divinig by 0 is forbidden so such a factor doesn't exist" : commentsPerPost));
     }
 
+    public int getUsersQuantity() {
+        return usersQuantity;
+    }
+
+    public int getPostsQuantity() {
+        return postsQuantity;
+    }
+
+    public int getCommentsQuantity() {
+        return commentsQuantity;
+    }
+
+    public Double getPostsPerUser() {
+        return postsPerUser;
+    }
+
+    public Double getCommentsPerUser() {
+        return commentsPerUser;
+    }
+
+    public Double getCommentsPerPost() {
+        return commentsPerPost;
+    }
 }

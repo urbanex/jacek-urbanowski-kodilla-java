@@ -42,9 +42,12 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertEquals(4, forumStatistics.usersQuantity);
-        Assert.assertEquals(10, forumStatistics.postsQuantity);
-        Assert.assertEquals(25, forumStatistics.commentsQuantity);
+        Assert.assertEquals(4, forumStatistics.getUsersQuantity());
+        Assert.assertEquals(10, forumStatistics.getPostsQuantity());
+        Assert.assertEquals(25, forumStatistics.getCommentsQuantity());
+        Assert.assertEquals(2.5, forumStatistics.getPostsPerUser(), 0);
+        Assert.assertEquals(6.25, forumStatistics.getCommentsPerUser(), 0);
+        Assert.assertEquals(2.5, forumStatistics.getCommentsPerPost(), 0);
 
     }
 
@@ -56,7 +59,9 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertNull(forumStatistics.commentsPerPost);
+        Assert.assertNull(forumStatistics.getCommentsPerPost());
+        Assert.assertEquals(new Double(0), forumStatistics.getPostsPerUser());
+        Assert.assertEquals(0, forumStatistics.getPostsQuantity());
 
     }
 
@@ -68,7 +73,9 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertEquals(new Double(250.0), forumStatistics.postsPerUser);
+        Assert.assertEquals(new Double(0.025), forumStatistics.getCommentsPerPost());
+        Assert.assertEquals(250.0, forumStatistics.getPostsPerUser(), 0);
+        Assert.assertEquals(1000, forumStatistics.getPostsQuantity());
     }
 
     @Test //gdy liczba komentarzy = 0
@@ -79,9 +86,9 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertEquals(new Double(0), forumStatistics.commentsPerUser);
-        Assert.assertEquals(new Double(0), forumStatistics.commentsPerPost);
-        Assert.assertEquals(0, forumStatistics.commentsQuantity);
+        Assert.assertEquals(0.0, forumStatistics.getCommentsPerUser(), 0);
+        Assert.assertEquals(0.0, forumStatistics.getCommentsPerPost(), 0);
+        Assert.assertEquals(0, forumStatistics.getCommentsQuantity());
     }
 
     @Test //gdy liczba komentarzy < liczba postów
@@ -93,7 +100,7 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertEquals(new Double(0.5), forumStatistics.commentsPerPost);
+        Assert.assertEquals(0.5, forumStatistics.getCommentsPerPost(), 0);
     }
 
     @Test //gdy liczba komentarzy < liczba postów
@@ -105,7 +112,7 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertEquals(new Double(2), forumStatistics.commentsPerPost);
+        Assert.assertEquals(2.0, forumStatistics.getCommentsPerPost(), 0);
     }
 
     @Test //gdy liczba userów = 0
@@ -118,9 +125,9 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertEquals(0, forumStatistics.usersQuantity);
-        Assert.assertNull(forumStatistics.postsPerUser);
-        Assert.assertNull(forumStatistics.commentsPerUser);
+        Assert.assertEquals(0, forumStatistics.getUsersQuantity());
+        Assert.assertNull(forumStatistics.getPostsPerUser());
+        Assert.assertNull(forumStatistics.getCommentsPerUser());
     }
 
     @Test //gdy liczba userów = 100
@@ -135,7 +142,7 @@ public class ForumStatisticsTestSuite {
         forumStatistics.calculateAdvStatistics(statisticsMock);
 
         //then
-        Assert.assertEquals(100, forumStatistics.usersQuantity);
+        Assert.assertEquals(100, forumStatistics.getUsersQuantity());
     }
 
 }
