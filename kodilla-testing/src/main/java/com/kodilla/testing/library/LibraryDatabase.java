@@ -5,10 +5,10 @@ import java.util.List;
 public interface LibraryDatabase {
 
     // lists books having title beginning with titleFragment
-    List<Book> listBooksWithCondition_INTERFACE_LibraryDatabase(String titleFragment);
+    List<Book> listBooksWithCondition_INTERFEJS(String titleFragment);
 
     // list books borrowed by libraryUser
-    List<Book> listBooksInHandsOf_INTERFACE_LibraryDatabase(LibraryUser libraryUser);
+    List<Book> listBooksInHandsOf_INTERFEJS(LibraryUser libraryUser);
 
     // try to rent a book for libraryUser
     // returns true when success
