@@ -1,12 +1,13 @@
 package com.kodilla.stream;
 
 import com.kodilla.stream.beautifier.PoemBeautifier;
+import com.kodilla.stream.iterate.NumbersGenerator;
 import com.kodilla.stream.lambda.*;
 import com.kodilla.stream.reference.FunctionalCalculator;
 
 public class StreamMain {
     public static void main(String[] args) {
-        System.out.println("Welcome to module 7 - Stream");
+        //System.out.println("Welcome to module 7 - Stream");
 
         //OOP
         //SaySomething saySomething = new SaySomething();
@@ -23,7 +24,9 @@ public class StreamMain {
         //Processor processor = new Processor();
         //processor.execute(() -> System.out.println("This is an example text."));
 
-        ExpressionExecutor expressionExecutor = new ExpressionExecutor();
+
+        //MODUŁ 7.1 przykład
+        /*ExpressionExecutor expressionExecutor = new ExpressionExecutor();
 
         System.out.println("Calculating expressions with lambdas");
         expressionExecutor.executeExpression(10, 5, (a, b) -> a + b);
@@ -39,9 +42,10 @@ public class StreamMain {
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::subBFromA);
         expressionExecutor.executeExpression(3, 4, FunctionalCalculator::divideAByB);
 
-        System.out.println();
+        System.out.println();*/
 
-        PoemBeautifier poemBeautifier = new PoemBeautifier();
+        //MODUŁ 7.1 zadanie
+        /*PoemBeautifier poemBeautifier = new PoemBeautifier();
         String inputWord = "aBcDeFgHiJkLmNoPqRsTuWvXyZ";
 
         System.out.print("converting \"" + inputWord + "\" to uppercase: ");
@@ -57,8 +61,10 @@ public class StreamMain {
         System.out.println(poemBeautifier.beautify(inputWord, str -> str.substring(str.length()-5)));
 
         System.out.print("adding preffix and suffix to \"" + inputWord + "\": ");
-        System.out.println(poemBeautifier.beautify(inputWord, str -> "~~~" + str + "~~~"));
+        System.out.println(poemBeautifier.beautify(inputWord, str -> "~~~" + str + "~~~"));*/
 
+        System.out.println("Using Stream to generate even numbers from 1 to 20");
+        NumbersGenerator.generateEven(20);
 
     }
 }
