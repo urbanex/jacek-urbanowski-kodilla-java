@@ -45,19 +45,19 @@ public class StreamMain {
         String inputWord = "aBcDeFgHiJkLmNoPqRsTuWvXyZ";
 
         System.out.print("converting \"" + inputWord + "\" to uppercase: ");
-        System.out.println(poemBeautifier.beautify(inputWord, (str)-> str.toUpperCase()));
+        System.out.println(poemBeautifier.beautify(inputWord, String::toUpperCase));  //referencja do metody
 
         System.out.print("converting \"" + inputWord + "\" to lowercase: ");
-        System.out.println(poemBeautifier.beautify(inputWord, (str)-> str.toLowerCase()));
+        System.out.println(poemBeautifier.beautify(inputWord, str -> str.toLowerCase())); // wyrazenie lambda
 
         System.out.print("first 5 letters of \"" + inputWord + "\": ");
-        System.out.println(poemBeautifier.beautify(inputWord, (str)-> str.substring(0,5)));
+        System.out.println(poemBeautifier.beautify(inputWord, str -> str.substring(0,5)));
 
         System.out.print("last 5 letters of \"" + inputWord + "\": ");
-        System.out.println(poemBeautifier.beautify(inputWord, (str)-> str.substring(str.length()-5)));
+        System.out.println(poemBeautifier.beautify(inputWord, str -> str.substring(str.length()-5)));
 
         System.out.print("adding preffix and suffix to \"" + inputWord + "\": ");
-        System.out.println(poemBeautifier.beautify(inputWord, (str)-> "~~~" + str + "~~~"));
+        System.out.println(poemBeautifier.beautify(inputWord, str -> "~~~" + str + "~~~"));
 
 
     }
