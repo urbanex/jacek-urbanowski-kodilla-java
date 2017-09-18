@@ -36,18 +36,18 @@ public class WorldTestSuite {
         asiaList.add(country3);
 
         List<Country> europaList = new ArrayList<>();
-        asiaList.add(country4);
-        asiaList.add(country5);
-        asiaList.add(country6);
+        europaList.add(country4);
+        europaList.add(country5);
+        europaList.add(country6);
 
         List<Country> southAmericaList = new ArrayList<>();
-        asiaList.add(country7);
-        asiaList.add(country8);
-        asiaList.add(country9);
+        southAmericaList.add(country7);
+        southAmericaList.add(country8);
+        southAmericaList.add(country9);
 
         Continent asia = new Continent(asiaList);
-        Continent europa = new Continent(asiaList);
-        Continent southAmerica = new Continent(asiaList);
+        Continent europa = new Continent(europaList);
+        Continent southAmerica = new Continent(southAmericaList);
 
         List<Continent> worldList = new ArrayList<>();
         worldList.add(asia);
@@ -60,7 +60,7 @@ public class WorldTestSuite {
         BigDecimal peopleAllAroundTheWorld = world.getPeopleQuantity();
 
         //then  //w tej liczbie ludność Rosji jest tylko raz
-        Assert.assertEquals(new BigDecimal("2965451060"),peopleAllAroundTheWorld);
+        Assert.assertEquals(new BigDecimal("g"),peopleAllAroundTheWorld);
 
 
 

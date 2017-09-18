@@ -2,10 +2,10 @@ package com.kodilla.stream.world;
 
 import java.util.List;
 
-public class Continent {
+public final class Continent {
     private final List<Country> countryList;
 
-    public Continent(List<Country> countryList) {
+    public Continent(final List<Country> countryList) {
         this.countryList = countryList;
     }
 

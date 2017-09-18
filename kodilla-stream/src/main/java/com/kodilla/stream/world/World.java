@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class World {
+public final class World {
     private final List<Continent> continentList;
 
-    public World(List<Continent> continentList) {
+    public World(final List<Continent> continentList) {
         this.continentList = continentList;
     }
 
