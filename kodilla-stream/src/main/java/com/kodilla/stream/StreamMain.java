@@ -133,7 +133,7 @@ public class StreamMain {
 
         System.out.println("# elements: " + theResultMap.size());
         theResultMap.entrySet().stream()
-                .map(entry -> entry.getKey() + ": " + entry.getValue())
+                .map(entry -> entry.getKey() + ": " + entry.getValue())git
                 .forEach(System.out::println);*/
 
 
