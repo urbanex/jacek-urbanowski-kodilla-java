@@ -60,7 +60,7 @@ public class WorldTestSuite {
         BigDecimal peopleAllAroundTheWorld = world.getPeopleQuantity();
 
         //then  //w tej liczbie ludność Rosji jest tylko raz
-        Assert.assertEquals(new BigDecimal("g"),peopleAllAroundTheWorld);
+        Assert.assertEquals(new BigDecimal("2965451060"),peopleAllAroundTheWorld);
 
 
 
