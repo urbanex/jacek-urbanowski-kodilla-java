@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.YEARS;
+
 public class StreamMain {
     public static void main(String[] args) {
         //System.out.println("Welcome to module 7 - Stream");
@@ -125,7 +127,7 @@ public class StreamMain {
         Forum theUserList = new Forum();
         Map<Integer, ForumUser> theResultMap = theUserList.getUserList().stream()
                 .filter(user -> user.getSex() == 'M')
-                .filter(user -> LocalDate.now().getYear() - user.getBirthDate().getYear() > 20)
+                .filter(user -> YEARS.between(user.getBirthDate(), LocalDate.now()) > 20)
                 .filter(user -> user.getPostQuantity() > 0)
                 .collect(Collectors.toMap(ForumUser::getUserID, user -> user));
 
