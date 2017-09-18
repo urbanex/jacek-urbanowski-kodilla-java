@@ -124,7 +124,7 @@ public class StreamMain {
 
         //MODUŁ 7.3 zadanie
 
-        Forum theUserList = new Forum();
+        /*Forum theUserList = new Forum();
         Map<Integer, ForumUser> theResultMap = theUserList.getUserList().stream()
                 .filter(user -> user.getSex() == 'M')
                 .filter(user -> YEARS.between(user.getBirthDate(), LocalDate.now()) >= 20)
@@ -134,6 +134,11 @@ public class StreamMain {
         System.out.println("# elements: " + theResultMap.size());
         theResultMap.entrySet().stream()
                 .map(entry -> entry.getKey() + ": " + entry.getValue())
-                .forEach(System.out::println);
+                .forEach(System.out::println);*/
+
+        //MODUŁ 7.4 zadanie
+
+
+
     }
 }
