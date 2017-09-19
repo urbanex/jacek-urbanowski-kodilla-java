@@ -15,7 +15,7 @@ public final class World {
 
         BigDecimal allPeople = continentList.stream()
                 .flatMap(continent -> continent.getCountryList().stream())
-                .collect(Collectors.toSet()).stream()
+                .distinct() //zwraca unikalne obiekty/wyrzuca duplikaty
                 .map(country -> country.getPeopleQuantity())
                 .reduce(BigDecimal.ZERO, (sum, current) -> sum = sum.add(current));
 

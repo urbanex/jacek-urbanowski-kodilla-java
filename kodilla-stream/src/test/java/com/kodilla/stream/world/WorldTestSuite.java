@@ -13,7 +13,6 @@ public class WorldTestSuite {
     public void testGetPeopleQuantity(){
         //given
 
-
             //asia
             //Rosja celowo zarówno w Azji jak i w Europie
         Country country1 = new Country("Rosja", new BigDecimal("142470272"));
@@ -60,7 +59,7 @@ public class WorldTestSuite {
         BigDecimal peopleAllAroundTheWorld = world.getPeopleQuantity();
 
         //then  //w tej liczbie ludność Rosji jest tylko raz
-        Assert.assertEquals(new BigDecimal("2965451060"),peopleAllAroundTheWorld);
+        Assert.assertEquals(new BigDecimal("2965451060"), peopleAllAroundTheWorld);
 
 
 
