@@ -54,7 +54,7 @@ public class StreamMain {
         System.out.println();*/
 
         //MODUŁ 7.1 zadanie
-        /*PoemBeautifier poemBeautifier = new PoemBeautifier();
+/*        PoemBeautifier poemBeautifier = new PoemBeautifier();
         String inputWord = "aBcDeFgHiJkLmNoPqRsTuWvXyZ";
 
         System.out.print("converting \"" + inputWord + "\" to uppercase: ");
@@ -65,6 +65,8 @@ public class StreamMain {
 
         System.out.print("first 5 letters of \"" + inputWord + "\": ");
         System.out.println(poemBeautifier.beautify(inputWord, str -> str.substring(0,5)));
+
+        //System.out.println(poemBeautifier.beautify(inputWord, (str, f, s)-> str.substring(f,s)));
 
         System.out.print("last 5 letters of \"" + inputWord + "\": ");
         System.out.println(poemBeautifier.beautify(inputWord, str -> str.substring(str.length()-5)));
@@ -106,7 +108,7 @@ public class StreamMain {
 
         Map<String, Book> theResultMapOfBooks = theBookDirectory.getList().stream()
                 .filter(book -> book.getYearOfPublication() > 2005)
-                .collect(Collectors.toMap(Book::getSignature, book -> book));////// CO TU SIE DZIEJE?
+                .collect(Collectors.toMap(Book::getSignature, book -> book));
 
         System.out.println("# elements: " + theResultMapOfBooks.size());
         theResultMapOfBooks.entrySet().stream()
