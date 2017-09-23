@@ -149,8 +149,7 @@ public class BoardTestSuite {
         List<TaskList> inProgressTasks = new ArrayList<>();
         inProgressTasks.add(new TaskList("In progress"));
 
-        OptionalDouble inProgressTasksAverageDuration = IntStream.range(0, project.getTaskLists().size())
-                .mapToObj(n -> project.getTaskLists().get(n))
+        OptionalDouble inProgressTasksAverageDuration = project.getTaskLists().stream()
                 .filter(inProgressTasks::contains)
                 .flatMap(taskList -> taskList.getTasks().stream())
                 .map(task -> task.getCreated())
@@ -159,7 +158,6 @@ public class BoardTestSuite {
 
         //then
         Assert.assertEquals(10, inProgressTasksAverageDuration.getAsDouble(), 0);
-        Assert.assertEquals(1, inProgressTasks.size());
     }
 
     @Test
@@ -185,7 +183,6 @@ public class BoardTestSuite {
 
         //then
         Assert.assertEquals(10, inProgressAllTasksDuration / inProgressTasksQuantity);
-        Assert.assertEquals(1, inProgressTasks.size());
     }
 
 }
