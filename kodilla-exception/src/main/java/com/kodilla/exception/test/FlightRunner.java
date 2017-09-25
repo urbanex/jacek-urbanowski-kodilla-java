@@ -6,7 +6,6 @@ import java.util.Map;
 public class FlightRunner {
 
     public boolean findFlight(Flight flight) throws RouteNotFoundException {
-        String message = "there is no airport in ";
         Map<String, Boolean> map = new HashMap<>();
         map.put("Bratislava", true);
         map.put("Budapest", true);
@@ -23,22 +22,25 @@ public class FlightRunner {
         map.put("Madrid", false);
         map.put("Lisbon", false);
 
-        boolean mapContainsArrivalAirport = map.containsKey(flight.getArrivalAirport());
-        boolean mapContainsDepartureAirport = map.containsKey(flight.getDepartureAirport());
-
         String arrivalAirport = flight.getArrivalAirport();
         String departureAirport = flight.getDepartureAirport();
+
+        boolean mapContainsArrivalAirport = map.containsKey(arrivalAirport);
+        boolean mapContainsDepartureAirport = map.containsKey(departureAirport);
 
         if (mapContainsArrivalAirport && mapContainsDepartureAirport) {
             return map.get(arrivalAirport) && map.get(departureAirport);
         } else {
+            String message;
+
             if (!mapContainsArrivalAirport && !mapContainsDepartureAirport) {
                 message = "there are no airports in " + departureAirport + " and " + arrivalAirport;
             } else if (!mapContainsArrivalAirport) {
-                message += arrivalAirport;
+                message = "there is no airport in " + arrivalAirport;
             } else {
-                message += departureAirport;
+                message = "there is no airport in " + departureAirport;
             }
+
             throw new RouteNotFoundException(message);
         }
     }
