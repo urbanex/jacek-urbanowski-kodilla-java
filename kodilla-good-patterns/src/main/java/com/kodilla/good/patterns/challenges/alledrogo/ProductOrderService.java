@@ -10,7 +10,8 @@ public class ProductOrderService {
         OrderDto orderDto = orderProcessor.process(order);
 
         if (orderDto.isBought()) {
-            System.out.println("SUMMARY: " + orderDto.getProduct().getProductName() + " has been ordered by " + orderDto.getUser().getNickname() + ".");
+            System.out.println("SUMMARY: " + orderDto.getProduct().getProductName() + " has been ordered by "
+                    + orderDto.getUser().getNickname() + ".");
         } else {
             System.out.println("SUMMARY: The order couldn't be completed.");
         }

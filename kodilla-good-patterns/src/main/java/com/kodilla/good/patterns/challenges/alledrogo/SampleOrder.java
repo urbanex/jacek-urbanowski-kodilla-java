@@ -8,7 +8,7 @@ public class SampleOrder {
 
         User sampleUser = new User("misiek90", "Michal", "Michalski");
         Product sampleProduct = new Product("Vacuum Cleaner");
-        LocalDateTime sampleOrderTime = LocalDateTime.of(2017, 10, 01, 12, 8, 23);
+        LocalDateTime sampleOrderTime = LocalDateTime.of(2017, 10, 1, 12, 8, 23);
 
         return new Order(sampleUser, sampleProduct, sampleOrderTime);
 
