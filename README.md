@@ -1,0 +1,1 @@
+# kodilla-good-patterns
