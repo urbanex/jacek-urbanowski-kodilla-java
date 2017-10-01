@@ -12,5 +12,4 @@ public class Provider {
     public String getName() {
         return name;
     }
-
 }

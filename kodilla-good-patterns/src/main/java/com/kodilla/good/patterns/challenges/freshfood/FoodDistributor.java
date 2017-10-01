@@ -8,5 +8,4 @@ public interface FoodDistributor {
     }
 
     void process(Order order);
-
 }

@@ -5,7 +5,6 @@ public class GlutenFreeShop implements FoodDistributor{
     public void process(Order order) {
         summary(order);
         System.out.println("Dziękujemy za zakupy w GlutenFreeShop!\n");
-
     }
 }
 

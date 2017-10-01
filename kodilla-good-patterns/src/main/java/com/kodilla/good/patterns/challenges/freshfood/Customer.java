@@ -10,5 +10,4 @@ public class Customer {
     public int getCustomerId() {
         return customerId;
     }
-
 }
