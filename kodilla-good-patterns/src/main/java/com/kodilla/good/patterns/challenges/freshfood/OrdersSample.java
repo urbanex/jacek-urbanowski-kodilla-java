@@ -30,5 +30,6 @@ public class OrdersSample {
         ordersList.add(new Order(providersList.get(3), productsList.get(3), 10, customersList.get(0)));
 
         return new ArrayList<>(ordersList);
+
     }
 }

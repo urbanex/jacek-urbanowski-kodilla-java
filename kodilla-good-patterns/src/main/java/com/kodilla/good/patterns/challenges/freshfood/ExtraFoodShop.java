@@ -6,4 +6,5 @@ public class ExtraFoodShop implements FoodDistributor {
         summary(order);
         System.out.println("Dziękujemy za zakupy w ExtraFoodShop!\n");
     }
+
 }
