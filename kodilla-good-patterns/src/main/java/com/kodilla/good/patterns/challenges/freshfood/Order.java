@@ -1,31 +1,45 @@
 package com.kodilla.good.patterns.challenges.freshfood;
 
-public class Order {
-    private Provider provider;
-    private Product product;
-    private double quantity;
-    private Customer customer;
+import com.kodilla.good.patterns.challenges.freshfood.distributors.FoodDistributor;
 
-    public Order(final Provider provider, final Product product, final double quantity, final Customer customer) {
-        this.provider = provider;
+import java.time.LocalDateTime;
+
+public class Order {
+    private FoodDistributor foodDistributor;
+    private Product product;
+    private int quantity;
+    private int orderNumber;
+    private LocalDateTime orderTime;
+
+    public Order(final FoodDistributor foodDistributor,
+                 final Product product,
+                 final int quantity,
+                 final int orderNumber,
+                 final LocalDateTime orderTime) {
+        this.foodDistributor = foodDistributor;
         this.product = product;
         this.quantity = quantity;
-        this.customer = customer;
+        this.orderNumber = orderNumber;
+        this.orderTime = orderTime;
     }
 
-    public Provider getProvider() {
-        return provider;
+    public FoodDistributor getFoodDistributor() {
+        return foodDistributor;
     }
 
     public Product getProduct() {
         return product;
     }
 
-    public double getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public Customer getCustomer() {
-        return customer;
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public LocalDateTime getOrderTime() {
+        return orderTime;
     }
 }
