@@ -16,7 +16,7 @@ public class FileReader {
         try (Stream<String> fileLines = Files.lines(Paths.get(file.getPath()))) {
 
             fileLines.forEach(System.out::println);
-            fileLines.close();git
+            fileLines.close();
 
         } catch (IOException e) {
             //moduł 8.2
