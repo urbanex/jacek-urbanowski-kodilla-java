@@ -12,10 +12,10 @@ public class Order {
     private LocalDateTime orderTime;
 
     public Order(final FoodDistributor foodDistributor,
-                 final Product product,
-                 final int quantity,
                  final int orderNumber,
-                 final LocalDateTime orderTime) {
+                 final LocalDateTime orderTime,
+                 final Product product,
+                 final int quantity) {
         this.foodDistributor = foodDistributor;
         this.product = product;
         this.quantity = quantity;
@@ -42,4 +42,6 @@ public class Order {
     public LocalDateTime getOrderTime() {
         return orderTime;
     }
+
+
 }
