@@ -42,6 +42,4 @@ public class Order {
     public LocalDateTime getOrderTime() {
         return orderTime;
     }
-
-
 }

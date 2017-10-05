@@ -1,9 +1,6 @@
 package com.kodilla.good.patterns.challenges.freshfood;
 
-import com.kodilla.good.patterns.challenges.freshfood.distributors.ExtraFoodShop;
-import com.kodilla.good.patterns.challenges.freshfood.distributors.FoodDistributor;
-import com.kodilla.good.patterns.challenges.freshfood.distributors.GlutenFreeShop;
-import com.kodilla.good.patterns.challenges.freshfood.distributors.HealthyShop;
+import com.kodilla.good.patterns.challenges.freshfood.distributors.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

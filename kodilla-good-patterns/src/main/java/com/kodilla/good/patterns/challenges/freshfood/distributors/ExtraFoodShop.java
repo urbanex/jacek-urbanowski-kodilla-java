@@ -12,10 +12,10 @@ public class ExtraFoodShop implements FoodDistributor {
 
         if (isOrdered) {
             System.out.println("Zamówienie numer " + order.getOrderNumber() + " zostało zrealizowane!");
-            return new OrderDTO(true, order.getProduct(), order.getQuantity());
+            return new OrderDTO(true, order.getOrderTime(), order.getProduct(), order.getQuantity());
         } else {
             System.out.println("Zamówienie " + order.getOrderNumber() + " nie zostało zrealizowane. Skontaktuj się z extra@food.shop");
-            return new OrderDTO(false, order.getProduct(), order.getQuantity());
+            return new OrderDTO(false, order.getOrderTime(), order.getProduct(), order.getQuantity());
         }
     }
 
