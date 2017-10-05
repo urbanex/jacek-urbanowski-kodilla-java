@@ -12,10 +12,11 @@ public class Application {
             OrderDTO orderDTO = order.getFoodDistributor().process(order);
             if (orderDTO.isOrdered()) {
                 System.out.println("INFO O ZAMÓWIENIU:"
-                        + "\ndata: " + order.getOrderTime().format(DateTimeFormatter.ISO_DATE)
-                        + ", godzina: " + order.getOrderTime().format(DateTimeFormatter.ISO_TIME)
+                        + "\ndata: " + orderDTO.getOrderTime().format(DateTimeFormatter.ISO_DATE)
+                        + ", godzina: " + orderDTO.getOrderTime().format(DateTimeFormatter.ISO_TIME)
                         + "\ntowar: " + orderDTO.getProduct().getProductName()
-                        + "\nilość: " + orderDTO.getQuantity() + "\n");
+                        + "\nilość: " + orderDTO.getQuantity()
+                        + "\ndostawca: " + orderDTO.getFoodDistributor().getDistributorName() + "\n");
             }
         }
     }

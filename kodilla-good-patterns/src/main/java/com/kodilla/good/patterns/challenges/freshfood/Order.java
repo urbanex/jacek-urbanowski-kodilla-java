@@ -5,22 +5,30 @@ import com.kodilla.good.patterns.challenges.freshfood.distributors.FoodDistribut
 import java.time.LocalDateTime;
 
 public class Order {
+    private int orderNumber;
+    private LocalDateTime orderTime;
     private FoodDistributor foodDistributor;
     private Product product;
     private int quantity;
-    private int orderNumber;
-    private LocalDateTime orderTime;
 
-    public Order(final FoodDistributor foodDistributor,
-                 final int orderNumber,
+    public Order(final int orderNumber,
                  final LocalDateTime orderTime,
+                 final FoodDistributor foodDistributor,
                  final Product product,
                  final int quantity) {
+        this.orderNumber = orderNumber;
+        this.orderTime = orderTime;
         this.foodDistributor = foodDistributor;
         this.product = product;
         this.quantity = quantity;
-        this.orderNumber = orderNumber;
-        this.orderTime = orderTime;
+    }
+
+    public int getOrderNumber() {
+        return orderNumber;
+    }
+
+    public LocalDateTime getOrderTime() {
+        return orderTime;
     }
 
     public FoodDistributor getFoodDistributor() {
@@ -33,13 +41,5 @@ public class Order {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public int getOrderNumber() {
-        return orderNumber;
-    }
-
-    public LocalDateTime getOrderTime() {
-        return orderTime;
     }
 }
