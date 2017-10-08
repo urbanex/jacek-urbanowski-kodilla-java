@@ -31,7 +31,6 @@ public class AirlineTestSuite {
         airport4 = new Airport("4", "airport4");
         airport5 = new Airport("5", "airport5");
 
-        ////// SETTING DEPARTURE AIRPORTS = DESTINATION AIRPORTS
         //airport1: flights from: 4, flights to: 4
         airport1.setDepartureAirports(Arrays.asList(airport2, airport3, airport4, airport5));
         //airport2: flights from: 2, flights to: 2
@@ -98,15 +97,9 @@ public class AirlineTestSuite {
         Assert.assertEquals(1, flightsFromAirport4.size());
         Assert.assertEquals(1, flightsFromAirport5.size());
 
-        Assert.assertTrue(flightsFromAirport1.contains(directFlight1)
-                && flightsFromAirport1.contains(directFlight2)
-                && flightsFromAirport1.contains(directFlight3)
-                && flightsFromAirport1.contains(directFlight4));
-        Assert.assertTrue(flightsFromAirport2.contains(directFlight5)
-                && flightsFromAirport2.contains(directFlight6));
-        Assert.assertTrue(flightsFromAirport3.contains(directFlight7)
-                && flightsFromAirport3.contains(directFlight8)
-                && flightsFromAirport3.contains(directFlight9));
+        Assert.assertTrue(flightsFromAirport1.containsAll(Arrays.asList(directFlight1, directFlight2, directFlight3, directFlight4)));
+        Assert.assertTrue(flightsFromAirport2.containsAll(Arrays.asList(directFlight5, directFlight6)));
+        Assert.assertTrue(flightsFromAirport3.containsAll(Arrays.asList(directFlight7, directFlight8, directFlight9)));
         Assert.assertTrue(flightsFromAirport4.contains(directFlight10));
         Assert.assertTrue(flightsFromAirport5.contains(directFlight11));
     }
@@ -127,16 +120,10 @@ public class AirlineTestSuite {
         Assert.assertEquals(2, flightsToAirport4.size());
         Assert.assertEquals(1, flightsToAirport5.size());
 
-        Assert.assertTrue(flightsToAirport1.contains(directFlight5)
-                && flightsToAirport1.contains(directFlight7)
-                && flightsToAirport1.contains(directFlight10)
-                && flightsToAirport1.contains(directFlight11));
-        Assert.assertTrue(flightsToAirport2.contains(directFlight1)
-                && flightsToAirport2.contains(directFlight8));
-        Assert.assertTrue(flightsToAirport3.contains(directFlight2)
-                && flightsToAirport3.contains(directFlight6));
-        Assert.assertTrue(flightsToAirport4.contains(directFlight3)
-                && flightsToAirport4.contains(directFlight9));
+        Assert.assertTrue(flightsToAirport1.containsAll(Arrays.asList(directFlight5, directFlight7, directFlight10, directFlight11)));
+        Assert.assertTrue(flightsToAirport2.containsAll(Arrays.asList(directFlight1, directFlight8)));
+        Assert.assertTrue(flightsToAirport3.containsAll(Arrays.asList(directFlight2, directFlight6)));
+        Assert.assertTrue(flightsToAirport4.containsAll(Arrays.asList(directFlight3, directFlight9)));
         Assert.assertTrue(flightsToAirport5.contains(directFlight4));
     }
 
@@ -181,16 +168,12 @@ public class AirlineTestSuite {
         Assert.assertEquals(1, flightsThroughAirport4.size());
         Assert.assertEquals(0, flightsThroughAirport5.size());
 
-        Assert.assertTrue(flightsThroughAirport1.contains(flight213) && flightsThroughAirport1.contains(flight214)
-                && flightsThroughAirport1.contains(flight215) && flightsThroughAirport1.contains(flight312)
-                && flightsThroughAirport1.contains(flight314) && flightsThroughAirport1.contains(flight315)
-                && flightsThroughAirport1.contains(flight412) && flightsThroughAirport1.contains(flight413)
-                && flightsThroughAirport1.contains(flight415) && flightsThroughAirport1.contains(flight512)
-                && flightsThroughAirport1.contains(flight513) && flightsThroughAirport1.contains(flight514));
-        Assert.assertTrue(flightsThroughAirport2.contains(flight123) && flightsThroughAirport2.contains(flight321));
-        Assert.assertTrue(flightsThroughAirport3.contains(flight132) && flightsThroughAirport3.contains(flight134)
-                && flightsThroughAirport3.contains(flight231) && flightsThroughAirport3.contains(flight234));
+        Assert.assertTrue(flightsThroughAirport1.containsAll(Arrays.asList(flight213, flight214, flight215, flight312,
+                flight314, flight315, flight412, flight413, flight415, flight512, flight513, flight514)));
+        Assert.assertTrue(flightsThroughAirport2.containsAll(Arrays.asList(flight123, flight321)));
+        Assert.assertTrue(flightsThroughAirport3.containsAll(Arrays.asList(flight132, flight134, flight231, flight234)));
         Assert.assertTrue(flightsThroughAirport4.contains(flight341));
+
     }
 
     @Test

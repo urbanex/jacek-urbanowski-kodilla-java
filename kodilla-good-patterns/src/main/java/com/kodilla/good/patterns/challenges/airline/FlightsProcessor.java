@@ -16,6 +16,20 @@ public class FlightsProcessor {
         this.directFlights = directFlights;
     }
 
+    private List<Airport> getArrivalAirports(Airport airport) {
+        return directFlights.stream()
+                .filter(flight -> flight.getTo().equals(airport))
+                .map(DirectFlight::getFrom)
+                .collect(Collectors.toList());
+    }
+
+    private List<Airport> getDepartureAirports(Airport airport) {
+        return directFlights.stream()
+                .filter(flight -> flight.getFrom().equals(airport))
+                .map(DirectFlight::getTo)
+                .collect(Collectors.toList());
+    }
+
     public List<DirectFlight> getDirectFlights() {
         return directFlights;
     }
@@ -38,16 +52,8 @@ public class FlightsProcessor {
 
     public List<FlightWithAChange> getFlightsThrough(Airport through) {
         List<FlightWithAChange> flightsThrough = new ArrayList<>();
-
-        List<Airport> tempFrom = directFlights.stream()
-                .filter(flight -> flight.getTo().equals(through))
-                .map(flight -> flight.getFrom())
-                .collect(Collectors.toList());
-
-        List<Airport> tempTo = directFlights.stream()
-                .filter(flight -> flight.getFrom().equals(through))
-                .map(flight -> flight.getTo())
-                .collect(Collectors.toList());
+        List<Airport> tempFrom = getArrivalAirports(through);
+        List<Airport> tempTo = getDepartureAirports(through);
 
         for (int i = 0; i < tempFrom.size(); i++) {
             for (int j = 0; j < tempTo.size(); j++) {
@@ -61,40 +67,28 @@ public class FlightsProcessor {
     }
 
     public List<Flight> findFlight(Airport from, Airport to) {
-        List<Flight> resultFindingFlights;
-        boolean exists = directFlights.stream()
+        List<Flight> resultFindingFlights = new ArrayList<>(directFlights.stream()
                 .filter(flight -> flight.getFrom().equals(from))
                 .filter(flight -> flight.getTo().equals(to))
-                .count() != 0;
+                .collect(Collectors.toList()));
 
-        if (exists) {
-            resultFindingFlights = new ArrayList<>(directFlights.stream()
-                    .filter(flight -> flight.getFrom().equals(from))
-                    .filter(flight -> flight.getTo().equals(to))
-                    .collect(Collectors.toList()));
-        } else {
-            resultFindingFlights = new ArrayList<>();
-
-            List<Airport> temp1 = directFlights.stream()
-                    .filter(flight -> flight.getFrom().equals(from))
-                    .map(flight -> flight.getTo())
-                    .collect(Collectors.toList());
-            List<Airport> temp2 = directFlights.stream()
-                    .filter(flight -> flight.getTo().equals(to))
-                    .map(flight -> flight.getFrom())
-                    .collect(Collectors.toList());
-
-            temp1.addAll(temp2);
+        if (resultFindingFlights.size() == 0) {
+            List<Airport> firstFlightLandingAirports = getDepartureAirports(from);
+            List<Airport> secondFlightStartingAirports = getArrivalAirports(to);
+            List<Airport> temporaryList = new ArrayList<>();
+            temporaryList.addAll(firstFlightLandingAirports);
+            temporaryList.addAll(secondFlightStartingAirports);
 
             List<Airport> throughAirports = airports.stream()
                     .filter(airport -> airport.equals(from) || airport.equals(to))
                     .flatMap(airport -> airport.getDepartureAirports().stream())
-                    .filter(airport -> Collections.frequency(temp1, airport) > 1)
+                    .filter(airport -> Collections.frequency(temporaryList, airport) > 1)
                     .distinct()
                     .collect(Collectors.toList());
 
             for (Airport airport: throughAirports) {
-                FlightWithAChange flyThrough = getFlightsThrough(airport).get(getFlightsThrough(airport).indexOf(new FlightWithAChange(from, airport ,to)));
+                FlightWithAChange flyThrough = getFlightsThrough(airport).get(
+                        getFlightsThrough(airport).indexOf(new FlightWithAChange(from, airport ,to)));
                 resultFindingFlights.add(flyThrough);
             }
         }

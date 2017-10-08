@@ -34,10 +34,6 @@ public class Airport {
         this.directFlightFromList = directFlightFromList;
     }
 
-    public String getValue() {
-        return value;
-    }
-
     public String getAirportIndicator() {
         return airportIndicator;
     }
@@ -48,10 +44,6 @@ public class Airport {
 
     public List<DirectFlight> getDirectFlightToList() {
         return directFlightToList;
-    }
-
-    public List<Airport> getArrivalAirports() {
-        return arrivalAirports;
     }
 
     public List<DirectFlight> getDirectFlightFromList() {

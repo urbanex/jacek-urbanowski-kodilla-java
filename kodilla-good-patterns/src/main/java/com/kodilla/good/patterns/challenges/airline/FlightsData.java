@@ -10,9 +10,17 @@ import java.util.stream.Collectors;
 public class FlightsData {
     private final List<Airport> airports;
     private final List<DirectFlight> directFlights;
-    private int counter = 1;
 
     public FlightsData() {
+        airports = generateAllAirportsWithTheirsDepartureAirports();
+        directFlights = generateAllAvailableDirectFlights(airports);
+        setAllDirectFlightsNumbersAndIndicators(directFlights);
+        setArrivalAirports(airports, directFlights);
+        setFlightToLists(airports, directFlights);
+        setFlightFromLists(airports, directFlights);
+    }
+
+    private List<Airport> generateAllAirportsWithTheirsDepartureAirports(){
         Airport gdn = new Airport("GDN", "Gdańsk");
         Airport ieg = new Airport("IEG", "Zielona Góra");
         Airport krk = new Airport("KRK", "Kraków");
@@ -22,7 +30,6 @@ public class FlightsData {
         Airport szz = new Airport("SZZ", "Szczecin");
         Airport waw = new Airport("WAW", "Warszawa");
 
-        //set departure airports for each airport
         waw.setDepartureAirports(Arrays.asList(ktw, krk, poz, szz, gdn, ieg, rze));
         gdn.setDepartureAirports(Arrays.asList(waw, krk, rze));
         ktw.setDepartureAirports(Arrays.asList(waw, rze));
@@ -32,34 +39,46 @@ public class FlightsData {
         szz.setDepartureAirports(Arrays.asList(waw));
         ieg.setDepartureAirports(Arrays.asList(waw));
 
-        airports = Arrays.asList(waw, gdn, ktw, krk, poz, rze, szz, ieg);
-        directFlights = new ArrayList<>();
+        return new ArrayList<>(Arrays.asList(waw, gdn, ktw, krk, poz, rze, szz, ieg));
+    }
 
+    private List<DirectFlight> generateAllAvailableDirectFlights(List<Airport> airports){
+        List<DirectFlight> result = new ArrayList<>();
         for (Airport airport: airports) {
-            //generate all available directFlights
             airport.getDepartureAirports()
-                    .forEach(destination -> directFlights.add(new DirectFlight(airport, destination)));
-
-            //set flightToList for each airport
-            airport.setDirectFlightToList(directFlights.stream()
-                    .filter(flight -> flight.getFrom().equals(airport))
-                    .collect(Collectors.toList()));
+                    .forEach(destination -> result.add(new DirectFlight(airport, destination)));
         }
+        return new ArrayList<>(result);
+    }
 
-        //set all directFlights numbers and indicators
+    private void setAllDirectFlightsNumbersAndIndicators(List<DirectFlight> directFlights){
+        int counter = 1;
         for (DirectFlight directFlight : directFlights) {
             directFlight.setNumber(counter++);
-            directFlight.setFlightIndicator(directFlight.getFrom().getAirportIndicator() + " - " + directFlight.getTo().getAirportIndicator());
+            directFlight.setFlightIndicator(directFlight.getFrom().getAirportIndicator()
+                    + " - " + directFlight.getTo().getAirportIndicator());
         }
+    }
 
-        for (Airport airport: airports) {
-            //set arrival airports for each airport
+    private void setArrivalAirports(List<Airport> airports, List<DirectFlight> directFlights) {
+        for (Airport airport : airports) {
             airport.setArrivalAirports(directFlights.stream()
                     .filter(flights -> flights.getTo().equals(airport))
                     .map(flight -> flight.getFrom())
                     .collect(Collectors.toList()));
+        }
+    }
 
-            //set flightFromList for each airport
+    private void setFlightToLists(List<Airport> airports, List<DirectFlight> directFlights){
+        for (Airport airport: airports) {
+            airport.setDirectFlightToList(directFlights.stream()
+                    .filter(flight -> flight.getFrom().equals(airport))
+                    .collect(Collectors.toList()));
+        }
+    }
+
+    private void setFlightFromLists(List<Airport> airports, List<DirectFlight> directFlights){
+        for (Airport airport: airports) {
             airport.setDirectFlightFromList(directFlights.stream()
                     .filter(flight -> flight.getTo().equals(airport))
                     .collect(Collectors.toList()));
