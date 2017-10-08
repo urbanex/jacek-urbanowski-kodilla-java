@@ -11,7 +11,7 @@ public class FlightsProcessor {
     private final List<Airport> airports;
     private final List<DirectFlight> directFlights;
 
-    public FlightsProcessor(List<Airport> airports, List<DirectFlight> directFlights) {
+    public FlightsProcessor(final List<Airport> airports, final List<DirectFlight> directFlights) {
         this.airports = airports;
         this.directFlights = directFlights;
     }
@@ -39,14 +39,6 @@ public class FlightsProcessor {
     public List<FlightWithAChange> getFlightsThrough(Airport through) {
         List<FlightWithAChange> flightsThrough = new ArrayList<>();
 
-/*        List<DirectFlight> tempFrom = directFlights.stream()
-                .filter(flight -> flight.getTo().equals(through))
-                .collect(Collectors.toList());
-
-        List<DirectFlight> tempTo = directFlights.stream()
-                .filter(flight -> flight.getFrom().equals(through))
-                .collect(Collectors.toList());*/
-
         List<Airport> tempFrom = directFlights.stream()
                 .filter(flight -> flight.getTo().equals(through))
                 .map(flight -> flight.getFrom())
@@ -57,14 +49,10 @@ public class FlightsProcessor {
                 .map(flight -> flight.getTo())
                 .collect(Collectors.toList());
 
-
         for (int i = 0; i < tempFrom.size(); i++) {
             for (int j = 0; j < tempTo.size(); j++) {
                 if (tempFrom.get(i) != tempTo.get(j)) {
-
                     flightsThrough.add(new FlightWithAChange(tempFrom.get(i), through, tempTo.get(j)));
-
-                    //flightsThrough.add(new FlightWithAChange(tempFrom.get(i), tempTo.get(j)));
                 }
             }
         }
@@ -87,23 +75,25 @@ public class FlightsProcessor {
         } else {
             resultFindingFlights = new ArrayList<>();
 
-            List<Airport> temp = airports.stream()
-                    .filter(airport -> airport.equals(from) || airport.equals(to))
-                    .flatMap(airport -> airport.getDepartureAirports().stream())
+            List<Airport> temp1 = directFlights.stream()
+                    .filter(flight -> flight.getFrom().equals(from))
+                    .map(flight -> flight.getTo())
                     .collect(Collectors.toList());
+            List<Airport> temp2 = directFlights.stream()
+                    .filter(flight -> flight.getTo().equals(to))
+                    .map(flight -> flight.getFrom())
+                    .collect(Collectors.toList());
+
+            temp1.addAll(temp2);
 
             List<Airport> throughAirports = airports.stream()
                     .filter(airport -> airport.equals(from) || airport.equals(to))
                     .flatMap(airport -> airport.getDepartureAirports().stream())
-                    .filter(airport -> Collections.frequency(temp, airport) > 1)
+                    .filter(airport -> Collections.frequency(temp1, airport) > 1)
                     .distinct()
                     .collect(Collectors.toList());
 
             for (Airport airport: throughAirports) {
-                //DirectFlight directFlight1 = directFlights.get(directFlights.indexOf(new DirectFlight(from, airport)));
-                //DirectFlight directFlight2 = directFlights.get(directFlights.indexOf(new DirectFlight(airport, to)));
-                //FlightWithAChange flyThrough = getFlightsThrough(airport).get(getFlightsThrough(airport).indexOf(new FlightWithAChange(directFlight1, directFlight2)));
-
                 FlightWithAChange flyThrough = getFlightsThrough(airport).get(getFlightsThrough(airport).indexOf(new FlightWithAChange(from, airport ,to)));
                 resultFindingFlights.add(flyThrough);
             }
@@ -111,9 +101,4 @@ public class FlightsProcessor {
 
         return new ArrayList<>(resultFindingFlights);
     }
-
-    public void flight(Airport airport) {
-        System.out.println(airport.getDirectFlightToList());
-    }
-
 }

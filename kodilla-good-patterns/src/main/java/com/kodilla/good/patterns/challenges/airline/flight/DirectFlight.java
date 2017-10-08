@@ -6,7 +6,7 @@ public class DirectFlight extends Flight {
     private int number;
     private String flightIndicator;
 
-    public DirectFlight(Airport from, Airport to) {
+    public DirectFlight(final Airport from, final Airport to) {
         super(from, to);
     }
 

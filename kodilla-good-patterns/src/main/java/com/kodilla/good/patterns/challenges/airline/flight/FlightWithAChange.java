@@ -3,20 +3,9 @@ package com.kodilla.good.patterns.challenges.airline.flight;
 import com.kodilla.good.patterns.challenges.airline.Airport;
 
 public class FlightWithAChange extends Flight {
-/*    private final DirectFlight directFlight1;
-    private final DirectFlight directFlight2;
     private final Airport through;
 
-    public FlightWithAChange(final DirectFlight directFlight1, final DirectFlight directFlight2) {
-        super(directFlight1.getFrom(), directFlight2.getTo());
-        this.directFlight1 = directFlight1;
-        this.directFlight2 = directFlight2;
-        this.through = directFlight1.getTo();
-    }*/
-
-    private final Airport through;
-
-    public FlightWithAChange(Airport from, Airport through, Airport to) {
+    public FlightWithAChange(final Airport from, final Airport through, final Airport to) {
         super(from, to);
         this.through = through;
     }
@@ -51,22 +40,4 @@ public class FlightWithAChange extends Flight {
         result = 31 * result + through.hashCode();
         return result;
     }
-
-    /*    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        FlightWithAChange that = (FlightWithAChange) o;
-
-        if (!directFlight1.equals(that.directFlight1)) return false;
-        return directFlight2.equals(that.directFlight2);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = directFlight1.hashCode();
-        result = 31 * result + directFlight2.hashCode();
-        return result;
-    }*/
 }

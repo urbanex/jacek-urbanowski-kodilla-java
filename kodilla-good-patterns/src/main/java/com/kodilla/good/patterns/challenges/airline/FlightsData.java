@@ -25,14 +25,14 @@ public class FlightsData {
         //set departure airports for each airport
         waw.setDepartureAirports(Arrays.asList(ktw, krk, poz, szz, gdn, ieg, rze));
         gdn.setDepartureAirports(Arrays.asList(waw, krk, rze));
-        ieg.setDepartureAirports(Arrays.asList(waw));
-        krk.setDepartureAirports(Arrays.asList(waw, gdn));
         ktw.setDepartureAirports(Arrays.asList(waw, rze));
+        krk.setDepartureAirports(Arrays.asList(waw, gdn));
         poz.setDepartureAirports(Arrays.asList(waw));
         rze.setDepartureAirports(Arrays.asList(waw, ktw, gdn));
         szz.setDepartureAirports(Arrays.asList(waw));
+        ieg.setDepartureAirports(Arrays.asList(waw));
 
-        airports = Arrays.asList(gdn, ieg, krk, ktw, poz, rze, szz, waw);
+        airports = Arrays.asList(waw, gdn, ktw, krk, poz, rze, szz, ieg);
         directFlights = new ArrayList<>();
 
         for (Airport airport: airports) {

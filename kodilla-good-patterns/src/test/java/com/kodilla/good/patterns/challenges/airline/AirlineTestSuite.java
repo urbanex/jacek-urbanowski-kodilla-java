@@ -1,10 +1,10 @@
 package com.kodilla.good.patterns.challenges.airline;
 
 import com.kodilla.good.patterns.challenges.airline.flight.DirectFlight;
+import com.kodilla.good.patterns.challenges.airline.flight.Flight;
 import com.kodilla.good.patterns.challenges.airline.flight.FlightWithAChange;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,7 +20,8 @@ public class AirlineTestSuite {
     private static FlightsProcessor flightsProcessor;
     private static FlightsData flightsData;
     private static Airport airport1, airport2, airport3, airport4, airport5;
-    private static DirectFlight directFlight1, directFlight2, directFlight3, directFlight4, directFlight5, directFlight6, directFlight7, directFlight8, directFlight9, directFlight10, directFlight11;
+    private static DirectFlight directFlight1, directFlight2, directFlight3, directFlight4, directFlight5,
+            directFlight6, directFlight7, directFlight8, directFlight9, directFlight10, directFlight11;
 
     private static void generateSampleData() {
 
@@ -140,7 +141,32 @@ public class AirlineTestSuite {
     }
 
     @Test
-    public void getFlightsThroughTest() {
+    public void testGetFlightsThrough() {
+        //given
+        //through airport1
+        FlightWithAChange flight213 = new FlightWithAChange(airport2, airport1, airport3);
+        FlightWithAChange flight214 = new FlightWithAChange(airport2, airport1, airport4);
+        FlightWithAChange flight215 = new FlightWithAChange(airport2, airport1, airport5);
+        FlightWithAChange flight312 = new FlightWithAChange(airport3, airport1, airport2);
+        FlightWithAChange flight314 = new FlightWithAChange(airport3, airport1, airport4);
+        FlightWithAChange flight315 = new FlightWithAChange(airport3, airport1, airport5);
+        FlightWithAChange flight412 = new FlightWithAChange(airport4, airport1, airport2);
+        FlightWithAChange flight413 = new FlightWithAChange(airport4, airport1, airport3);
+        FlightWithAChange flight415 = new FlightWithAChange(airport4, airport1, airport5);
+        FlightWithAChange flight512 = new FlightWithAChange(airport5, airport1, airport2);
+        FlightWithAChange flight513 = new FlightWithAChange(airport5, airport1, airport3);
+        FlightWithAChange flight514 = new FlightWithAChange(airport5, airport1, airport4);
+        //through airport2
+        FlightWithAChange flight123 = new FlightWithAChange(airport1, airport2, airport3);
+        FlightWithAChange flight321 = new FlightWithAChange(airport3, airport2, airport1);
+        //through airport3
+        FlightWithAChange flight132 = new FlightWithAChange(airport1, airport3, airport2);
+        FlightWithAChange flight134 = new FlightWithAChange(airport1, airport3, airport4);
+        FlightWithAChange flight231 = new FlightWithAChange(airport2, airport3, airport1);
+        FlightWithAChange flight234 = new FlightWithAChange(airport2, airport3, airport4);
+        //through airport4
+        FlightWithAChange flight341 = new FlightWithAChange(airport3, airport4, airport1);
+
         //when
         List<FlightWithAChange> flightsThroughAirport1 = flightsProcessor.getFlightsThrough(sampleAirports.get(0));
         List<FlightWithAChange> flightsThroughAirport2 = flightsProcessor.getFlightsThrough(sampleAirports.get(1));
@@ -149,19 +175,83 @@ public class AirlineTestSuite {
         List<FlightWithAChange> flightsThroughAirport5 = flightsProcessor.getFlightsThrough(sampleAirports.get(4));
 
         //then
+        Assert.assertEquals(12, flightsThroughAirport1.size());
+        Assert.assertEquals(2, flightsThroughAirport2.size());
+        Assert.assertEquals(4, flightsThroughAirport3.size());
+        Assert.assertEquals(1, flightsThroughAirport4.size());
+        Assert.assertEquals(0, flightsThroughAirport5.size());
 
-
+        Assert.assertTrue(flightsThroughAirport1.contains(flight213) && flightsThroughAirport1.contains(flight214)
+                && flightsThroughAirport1.contains(flight215) && flightsThroughAirport1.contains(flight312)
+                && flightsThroughAirport1.contains(flight314) && flightsThroughAirport1.contains(flight315)
+                && flightsThroughAirport1.contains(flight412) && flightsThroughAirport1.contains(flight413)
+                && flightsThroughAirport1.contains(flight415) && flightsThroughAirport1.contains(flight512)
+                && flightsThroughAirport1.contains(flight513) && flightsThroughAirport1.contains(flight514));
+        Assert.assertTrue(flightsThroughAirport2.contains(flight123) && flightsThroughAirport2.contains(flight321));
+        Assert.assertTrue(flightsThroughAirport3.contains(flight132) && flightsThroughAirport3.contains(flight134)
+                && flightsThroughAirport3.contains(flight231) && flightsThroughAirport3.contains(flight234));
+        Assert.assertTrue(flightsThroughAirport4.contains(flight341));
     }
 
-    @Ignore
+    @Test
     public void testFindFlight() {
         //given
+        FlightWithAChange flight214 = new FlightWithAChange(airport2, airport1, airport4);
+        FlightWithAChange flight234 = new FlightWithAChange(airport2, airport3, airport4);
+        FlightWithAChange flight215 = new FlightWithAChange(airport2, airport1, airport5);
+        FlightWithAChange flight315 = new FlightWithAChange(airport3, airport1, airport5);
+        FlightWithAChange flight412 = new FlightWithAChange(airport4, airport1, airport2);
+        FlightWithAChange flight413 = new FlightWithAChange(airport4, airport1, airport3);
+        FlightWithAChange flight415 = new FlightWithAChange(airport4, airport1, airport5);
+        FlightWithAChange flight512 = new FlightWithAChange(airport5, airport1, airport2);
+        FlightWithAChange flight513 = new FlightWithAChange(airport5, airport1, airport3);
+        FlightWithAChange flight514 = new FlightWithAChange(airport5, airport1, airport4);
 
-        /*when(flightsProcessor.findFlight(sampleAirports.get(0),sampleAirports.get(1)))
-                .thenReturn();
-        *///when
+        //when
+        List<Flight> findedDirectFlight1 = flightsProcessor.findFlight(airport1, airport2);
+        List<Flight> findedDirectFlight2 = flightsProcessor.findFlight(airport1, airport3);
+        List<Flight> findedDirectFlight3 = flightsProcessor.findFlight(airport1, airport4);
+        List<Flight> findedDirectFlight4 = flightsProcessor.findFlight(airport1, airport5);
+        List<Flight> findedDirectFlight5 = flightsProcessor.findFlight(airport2, airport1);
+        List<Flight> findedDirectFlight6 = flightsProcessor.findFlight(airport2, airport3);
+        List<Flight> findedDirectFlight7 = flightsProcessor.findFlight(airport3, airport1);
+        List<Flight> findedDirectFlight8 = flightsProcessor.findFlight(airport3, airport2);
+        List<Flight> findedDirectFlight9 = flightsProcessor.findFlight(airport3, airport4);
+        List<Flight> findedDirectFlight10 = flightsProcessor.findFlight(airport4, airport1);
+        List<Flight> findedDirectFlight11 = flightsProcessor.findFlight(airport5, airport1);
+
+        List<Flight> findedFlight24 = flightsProcessor.findFlight(airport2, airport4);
+        List<Flight> findedFlight25 = flightsProcessor.findFlight(airport2, airport5);
+        List<Flight> findedFlight35 = flightsProcessor.findFlight(airport3, airport5);
+        List<Flight> findedFlight42 = flightsProcessor.findFlight(airport4, airport2);
+        List<Flight> findedFlight43 = flightsProcessor.findFlight(airport4, airport3);
+        List<Flight> findedFlight45 = flightsProcessor.findFlight(airport4, airport5);
+        List<Flight> findedFlight52 = flightsProcessor.findFlight(airport5, airport2);
+        List<Flight> findedFlight53 = flightsProcessor.findFlight(airport5, airport3);
+        List<Flight> findedFlight54 = flightsProcessor.findFlight(airport5, airport4);
 
         //then
+        Assert.assertEquals(Arrays.asList(directFlight1), findedDirectFlight1);
+        Assert.assertEquals(Arrays.asList(directFlight2), findedDirectFlight2);
+        Assert.assertEquals(Arrays.asList(directFlight3), findedDirectFlight3);
+        Assert.assertEquals(Arrays.asList(directFlight4), findedDirectFlight4);
+        Assert.assertEquals(Arrays.asList(directFlight5), findedDirectFlight5);
+        Assert.assertEquals(Arrays.asList(directFlight6), findedDirectFlight6);
+        Assert.assertEquals(Arrays.asList(directFlight7), findedDirectFlight7);
+        Assert.assertEquals(Arrays.asList(directFlight8), findedDirectFlight8);
+        Assert.assertEquals(Arrays.asList(directFlight9), findedDirectFlight9);
+        Assert.assertEquals(Arrays.asList(directFlight10), findedDirectFlight10);
+        Assert.assertEquals(Arrays.asList(directFlight11), findedDirectFlight11);
+
+        Assert.assertEquals(Arrays.asList(flight214, flight234), findedFlight24);
+        Assert.assertEquals(Arrays.asList(flight215), findedFlight25);
+        Assert.assertEquals(Arrays.asList(flight315), findedFlight35);
+        Assert.assertEquals(Arrays.asList(flight412), findedFlight42);
+        Assert.assertEquals(Arrays.asList(flight413), findedFlight43);
+        Assert.assertEquals(Arrays.asList(flight415), findedFlight45);
+        Assert.assertEquals(Arrays.asList(flight512), findedFlight52);
+        Assert.assertEquals(Arrays.asList(flight513), findedFlight53);
+        Assert.assertEquals(Arrays.asList(flight514), findedFlight54);
 
     }
 }

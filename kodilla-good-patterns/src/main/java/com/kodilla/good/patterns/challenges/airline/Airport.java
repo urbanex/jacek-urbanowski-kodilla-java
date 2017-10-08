@@ -13,7 +13,7 @@ public class Airport {
     private List<DirectFlight> directFlightToList;
     private List<DirectFlight> directFlightFromList;
 
-    public Airport(String airportIndicator, String value) {
+    public Airport(final String airportIndicator, final String value) {
         this.airportIndicator = airportIndicator;
         this.value = value;
     }
