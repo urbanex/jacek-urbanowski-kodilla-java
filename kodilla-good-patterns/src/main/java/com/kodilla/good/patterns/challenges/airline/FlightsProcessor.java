@@ -1,68 +1,119 @@
 package com.kodilla.good.patterns.challenges.airline;
 
+import com.kodilla.good.patterns.challenges.airline.flight.DirectFlight;
+import com.kodilla.good.patterns.challenges.airline.flight.Flight;
+import com.kodilla.good.patterns.challenges.airline.flight.FlightWithAChange;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class FlightsProcessor {
     private final List<Airport> airports;
-    private final List<Flight> flights;
+    private final List<DirectFlight> directFlights;
 
-    public FlightsProcessor(List<Airport> airports, List<Flight> flights) {
+    public FlightsProcessor(List<Airport> airports, List<DirectFlight> directFlights) {
         this.airports = airports;
-        this.flights = flights;
+        this.directFlights = directFlights;
     }
 
-    public List<Airport> getAirports() {
-        return airports;
+    public List<DirectFlight> getDirectFlights() {
+        return directFlights;
     }
 
-    public List<Flight> getFlights() {
-        return flights;
-    }
-
-    public List<Flight> getFlightsFrom(Airport airport) {
-        List<Flight> flightsFrom = flights.stream()
-                .filter(flight -> flight.getDepartureAirport().equals(airport))
+    public List<DirectFlight> getFlightsFrom(Airport airport) {
+        List<DirectFlight> flightsFrom = directFlights.stream()
+                .filter(flight -> flight.getFrom().equals(airport))
                 .collect(Collectors.toList());
 
         return new ArrayList<>(flightsFrom);
     }
 
-    public List<Flight> getFlightsTo(Airport airport) {
-        List<Flight> flightsTo = flights.stream()
-                .filter(flight -> flight.getArrivalAirport().equals(airport))
+    public List<DirectFlight> getFlightsTo(Airport airport) {
+        List<DirectFlight> flightsTo = directFlights.stream()
+                .filter(flight -> flight.getTo().equals(airport))
                 .collect(Collectors.toList());
 
         return new ArrayList<>(flightsTo);
     }
 
-    public void findFlight(Airport from, Airport to) {
-        boolean exists = flights.stream()
-                .filter(flight -> flight.getDepartureAirport().equals(from))
-                .filter(flight -> flight.getArrivalAirport().equals(to))
+    public List<FlightWithAChange> getFlightsThrough(Airport through) {
+        List<FlightWithAChange> flightsThrough = new ArrayList<>();
+
+/*        List<DirectFlight> tempFrom = directFlights.stream()
+                .filter(flight -> flight.getTo().equals(through))
+                .collect(Collectors.toList());
+
+        List<DirectFlight> tempTo = directFlights.stream()
+                .filter(flight -> flight.getFrom().equals(through))
+                .collect(Collectors.toList());*/
+
+        List<Airport> tempFrom = directFlights.stream()
+                .filter(flight -> flight.getTo().equals(through))
+                .map(flight -> flight.getFrom())
+                .collect(Collectors.toList());
+
+        List<Airport> tempTo = directFlights.stream()
+                .filter(flight -> flight.getFrom().equals(through))
+                .map(flight -> flight.getTo())
+                .collect(Collectors.toList());
+
+
+        for (int i = 0; i < tempFrom.size(); i++) {
+            for (int j = 0; j < tempTo.size(); j++) {
+                if (tempFrom.get(i) != tempTo.get(j)) {
+
+                    flightsThrough.add(new FlightWithAChange(tempFrom.get(i), through, tempTo.get(j)));
+
+                    //flightsThrough.add(new FlightWithAChange(tempFrom.get(i), tempTo.get(j)));
+                }
+            }
+        }
+
+        return new ArrayList<>(flightsThrough);
+    }
+
+    public List<Flight> findFlight(Airport from, Airport to) {
+        List<Flight> resultFindingFlights;
+        boolean exists = directFlights.stream()
+                .filter(flight -> flight.getFrom().equals(from))
+                .filter(flight -> flight.getTo().equals(to))
                 .count() != 0;
 
         if (exists) {
-            System.out.println("Bezpośrednie połączenie jest dostępne.");
+            resultFindingFlights = new ArrayList<>(directFlights.stream()
+                    .filter(flight -> flight.getFrom().equals(from))
+                    .filter(flight -> flight.getTo().equals(to))
+                    .collect(Collectors.toList()));
         } else {
-            System.out.println("Bezpośrednie połączenie niedostępne. Możliwość lotu z przesiądką w: ");
+            resultFindingFlights = new ArrayList<>();
 
             List<Airport> temp = airports.stream()
                     .filter(airport -> airport.equals(from) || airport.equals(to))
                     .flatMap(airport -> airport.getDepartureAirports().stream())
                     .collect(Collectors.toList());
 
-            airports.stream()
+            List<Airport> throughAirports = airports.stream()
                     .filter(airport -> airport.equals(from) || airport.equals(to))
                     .flatMap(airport -> airport.getDepartureAirports().stream())
                     .filter(airport -> Collections.frequency(temp, airport) > 1)
                     .distinct()
-                    .forEach(System.out::println);
+                    .collect(Collectors.toList());
+
+            for (Airport airport: throughAirports) {
+                //DirectFlight directFlight1 = directFlights.get(directFlights.indexOf(new DirectFlight(from, airport)));
+                //DirectFlight directFlight2 = directFlights.get(directFlights.indexOf(new DirectFlight(airport, to)));
+                //FlightWithAChange flyThrough = getFlightsThrough(airport).get(getFlightsThrough(airport).indexOf(new FlightWithAChange(directFlight1, directFlight2)));
+
+                FlightWithAChange flyThrough = getFlightsThrough(airport).get(getFlightsThrough(airport).indexOf(new FlightWithAChange(from, airport ,to)));
+                resultFindingFlights.add(flyThrough);
+            }
         }
+
+        return new ArrayList<>(resultFindingFlights);
     }
 
     public void flight(Airport airport) {
-        System.out.println(airport.getFlightListTo());
+        System.out.println(airport.getDirectFlightToList());
     }
 
 }
