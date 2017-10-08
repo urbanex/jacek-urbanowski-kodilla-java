@@ -1,42 +1,61 @@
 package com.kodilla.good.patterns.challenges.airline;
 
+import com.kodilla.good.patterns.challenges.airline.flight.DirectFlight;
+
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Airport {
+    private final String airportIndicator;
     private final String value;
-    private Set<Airport> departureAirports;
-    private Set<Airport> arrivalAirports;
-    private List<Flight> flightListTo = new ArrayList<>();
-    private List<Flight> flightListFrom = new ArrayList<>();
+    private List<Airport> departureAirports;
+    private List<Airport> arrivalAirports;
+    private List<DirectFlight> directFlightToList;
+    private List<DirectFlight> directFlightFromList;
 
-    public Airport(final String value) {
+    public Airport(final String airportIndicator, final String value) {
+        this.airportIndicator = airportIndicator;
         this.value = value;
     }
 
-    public void setDepartureAirports(Set airports) {
-        departureAirports = new HashSet<Airport>(airports);
+    public void setDepartureAirports(List airports) {
+        departureAirports = new ArrayList<Airport>(airports);
     }
 
-    public void setArrivalAirports(Set airports) {
-        arrivalAirports = new HashSet<Airport>(airports);
+    public void setArrivalAirports(List airports) {
+        arrivalAirports = new ArrayList<Airport>(airports);
     }
 
-
-    public List<Flight> getFlightListTo() {
-        for (Airport airport: departureAirports) {
-            flightListTo.add(new Flight(this, airport));
-        }
-        return flightListTo;
+    public void setDirectFlightToList(List<DirectFlight> directFlightToList) {
+        this.directFlightToList = directFlightToList;
     }
 
-    public List<Flight> getFlightListFrom() {
-        for (Airport airport: arrivalAirports) {
-            flightListFrom.add(new Flight(airport, this));
-        }
-        return flightListFrom;
+    public void setDirectFlightFromList(List<DirectFlight> directFlightFromList) {
+        this.directFlightFromList = directFlightFromList;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public String getAirportIndicator() {
+        return airportIndicator;
+    }
+
+    public List<Airport> getDepartureAirports() {
+        return departureAirports;
+    }
+
+    public List<DirectFlight> getDirectFlightToList() {
+        return directFlightToList;
+    }
+
+    public List<Airport> getArrivalAirports() {
+        return arrivalAirports;
+    }
+
+    public List<DirectFlight> getDirectFlightFromList() {
+        return directFlightFromList;
     }
 
     @Override
@@ -46,20 +65,15 @@ public class Airport {
 
         Airport airport = (Airport) o;
 
-        return value != null ? value.equals(airport.value) : airport.value == null;
+        if (!airportIndicator.equals(airport.airportIndicator)) return false;
+        return value.equals(airport.value);
     }
 
     @Override
     public int hashCode() {
-        return value != null ? value.hashCode() : 0;
-    }
-
-    public String getValue() {
-        return value;
-    }
-
-    public Set<Airport> getDepartureAirports() {
-        return departureAirports;
+        int result = airportIndicator.hashCode();
+        result = 31 * result + value.hashCode();
+        return result;
     }
 
     @Override
