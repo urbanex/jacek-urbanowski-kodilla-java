@@ -1,6 +1,5 @@
 package com.kodilla.spring.library;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -9,7 +8,8 @@ import java.util.List;
 @Service
 public final class Library {
     private final List<String> books = new ArrayList<>();
-    @Autowired
+    //autowired pojawia się tutaj przed polem klasy, jak chcemy by wstrzykiwanie odbywało się bezposrednio do zmiennej
+    //@Autowired
     private LibraryDbController libraryDbController;
 
     //wstrzykiwanie konstruktorem
@@ -29,7 +29,9 @@ public final class Library {
     }
 */
 
-    //wstrzykiwanie bezposrednio do wlasciwosci klasy - @Autowired przed polem klasy
+    public Library(final LibraryDbController libraryDbController) {
+        this.libraryDbController = libraryDbController;
+    }
 
     public void saveToDb() {
         libraryDbController.saveData();
