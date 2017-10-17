@@ -21,12 +21,11 @@ public class BoardTestSuite {
         boolean addTask2 = board.getInProgressList().addTask("zadanie 2 w toku");
         boolean addTask3 = board.getToDoList().addTask("zadanie 3 na przyszlosc");
 
-        System.out.println(board.getDoneList().getTasks().get(0));
-        System.out.println(board.getInProgressList().getTasks().get(0));
-        System.out.println(board.getToDoList().getTasks().get(0));
-
         Assert.assertTrue(addTask1);
         Assert.assertTrue(addTask2);
         Assert.assertTrue(addTask3);
+        Assert.assertEquals("zadanie 1 wykonane", board.getDoneList().getTasks().get(0));
+        Assert.assertEquals("zadanie 2 w toku", board.getInProgressList().getTasks().get(0));
+        Assert.assertEquals("zadanie 3 na przyszlosc", board.getToDoList().getTasks().get(0));
     }
 }
