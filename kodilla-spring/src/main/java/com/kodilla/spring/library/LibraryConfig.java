@@ -10,7 +10,7 @@ public class LibraryConfig {
         return new Library(libraryDbController());
     }
 
-    @Bean
+    //@Bean
     public LibraryDbController libraryDbController() {
         return new LibraryDbController();
     }

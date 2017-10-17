@@ -1,5 +1,6 @@
 package com.kodilla.spring.portfolio;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,12 +17,16 @@ public class BoardTestSuite {
                 new AnnotationConfigApplicationContext("com.kodilla.spring.portfolio");
         Board board = context.getBean(Board.class);
 
-        board.getDoneList().getTasks().add("zadanie 1 wykonane");
-        board.getInProgressList().getTasks().add("zadanie 2 w toku");
-        board.getToDoList().getTasks().add("zadanie 3 na przyszlosc");
+        boolean addTask1 = board.getDoneList().addTask("zadanie 1 wykonane");
+        boolean addTask2 = board.getInProgressList().addTask("zadanie 2 w toku");
+        boolean addTask3 = board.getToDoList().addTask("zadanie 3 na przyszlosc");
 
-        System.out.println(board.getToDoList().getTasks().get(0));
-        System.out.println(board.getInProgressList().getTasks().get(0));
         System.out.println(board.getDoneList().getTasks().get(0));
+        System.out.println(board.getInProgressList().getTasks().get(0));
+        System.out.println(board.getToDoList().getTasks().get(0));
+
+        Assert.assertEquals(true, addTask1);
+        Assert.assertEquals(true, addTask2);
+        Assert.assertEquals(true, addTask3);
     }
 }
