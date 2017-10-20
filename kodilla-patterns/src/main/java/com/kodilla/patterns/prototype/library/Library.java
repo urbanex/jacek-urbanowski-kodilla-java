@@ -1,0 +1,42 @@
+package com.kodilla.patterns.prototype.library;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public final class Library extends Prototype<Library> {
+    private String name;
+    private Set<Book> books = new HashSet<>();
+
+    public Library(final String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public Library shallowCopy() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    public Library deepCopy() throws CloneNotSupportedException {
+        Library clonedLibrary = this.shallowCopy();
+        clonedLibrary.books = new HashSet<>();
+        clonedLibrary.books = books.stream()
+                .collect(Collectors.toSet());
+        return clonedLibrary;
+    }
+
+    @Override
+    public String toString() {
+        return "Library{" +
+                "name='" + name + '\'' +
+                ", books=" + books +
+                '}';
+    }
+}
