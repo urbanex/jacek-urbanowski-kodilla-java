@@ -11,9 +11,7 @@ public class LibraryTestSuite {
     public void testGetBooks() {
         //given
         Library library = new Library("Library LEGO");
-        Book book1 = new Book("title1", "autor1", LocalDate.of(2001,1,1));
-        library.getBooks().add(book1);
-        IntStream.rangeClosed(2,10)
+        IntStream.rangeClosed(1,10)
                 .forEach(n -> library.getBooks().add(new Book("title" + n, "autor" + n,
                         LocalDate.of(2000,1,1).plusYears(n))));
 
@@ -32,7 +30,7 @@ public class LibraryTestSuite {
             e.printStackTrace();
         }
 
-        library.getBooks().remove(book1);
+        library.getBooks().remove(new Book("title1", "autor1", LocalDate.of(2001,1,1)));
 
         //then
         Assert.assertEquals(9, library.getBooks().size());
