@@ -3,7 +3,7 @@ package com.kodilla.patterns.prototype;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Board extends Prototype {
+public final class Board extends Prototype {
     private String name;
     private Set<TasksList> lists = new HashSet<>();
 
