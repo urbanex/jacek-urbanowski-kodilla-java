@@ -40,4 +40,12 @@ public class TaskFactoryTestSuite {
         Assert.assertEquals("driving", driving.getTaskName());
         Assert.assertTrue(driving.isTaskExecuted());
     }
+
+    @Test
+    public void testFactoryNullTask() {
+        //When
+        Task doingNothing = taskFactory.makeTask("doingNothing");
+        //Then
+        Assert.assertNull(doingNothing);
+    }
 }
