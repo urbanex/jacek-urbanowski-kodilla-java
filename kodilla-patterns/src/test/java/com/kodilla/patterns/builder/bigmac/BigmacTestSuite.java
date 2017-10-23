@@ -33,4 +33,31 @@ public class BigmacTestSuite {
         Assert.assertTrue(ingredients.containsAll(Arrays.asList("bacon", "cheese", "cucumber", "salad")));
         Assert.assertEquals(4, ingredients.size());
     }
+
+    @Test
+    public void testBigmacBuilderWithNonexistentIngredients() {
+        //Given
+        IllegalStateException exception = null;
+        Bigmac bigmac = null;
+
+        //when
+        try {
+             bigmac = new Bigmac.BigmacBuilder()
+                    .roll("with sesame")
+                    .burgers(2)
+                    .sauce("barbecue")
+                    .ingredient("bacon")
+                    .ingredient("cheese")
+                    .ingredient("cucumber")
+                    .ingredient("tomato")
+                    .build();
+        } catch (IllegalStateException e) {
+            exception = e;
+        }
+
+        //Then
+        Assert.assertNotNull(exception);
+        Assert.assertEquals("No such an ingredient. Available ingredients: " +
+                "salad, onion, bacon, shrimp, cheese, cucumber, chilli pepper, mushrooms.", exception.getMessage());
+    }
 }

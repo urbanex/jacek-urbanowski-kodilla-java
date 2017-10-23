@@ -3,14 +3,17 @@ package com.kodilla.patterns.builder.bigmac;
 import java.util.*;
 
 public final class Bigmac {
-    private final String roll;
-    private static final String WITH_SESAME = "with sesame", WITHOUT_SESAME = "without sesame";
-    private final int burgers;
-    private final String sauce;
-    private static final String STANDARD = "standard", THOUSAND_ISLANDS = "1000 islands", BARBECUE = "barbecue";
-    private final Set<String> ingredients;
-    private static final Set<String> availableIngredients =
+    private static final Set<String> AVAILABLE_ROLLS =
+            new HashSet<>(Arrays.asList("with sesame","without sesame"));
+    private static final Set<String> AVAILABLE_SAUCES =
+            new HashSet<>(Arrays.asList("standard", "1000 islands", "barbecue"));
+    private static final Set<String> AVAILABLE_INGREDIENTS =
             new HashSet<>(Arrays.asList("salad", "onion", "bacon", "shrimp", "cheese", "cucumber", "chilli pepper", "mushrooms"));
+    private final int burgers;
+    private final String roll;
+    private final String sauce;
+    private final Set<String> ingredients;
+
 
     private Bigmac(final String roll, final int burgers, final String sauce, final Set<String> ingredients) {
         this.roll = roll;
@@ -26,7 +29,7 @@ public final class Bigmac {
         private Set<String> ingredients = new HashSet<>();
 
         public BigmacBuilder roll(String roll) {
-            if (!(roll.equals(WITH_SESAME) || roll.equals(WITHOUT_SESAME))) {
+            if (!AVAILABLE_ROLLS.contains(roll)) {
                 throw new IllegalStateException("No such a roll. Available rolls: with sesame, without sesame.");
             }
             this.roll = roll;
@@ -42,7 +45,7 @@ public final class Bigmac {
         }
 
         public BigmacBuilder sauce(String sauce) {
-            if (!(sauce.equals(STANDARD) || sauce.equals(THOUSAND_ISLANDS) || sauce.equals(BARBECUE))) {
+            if (!AVAILABLE_SAUCES.contains(sauce)) {
                 throw new IllegalStateException("No such a sauce. Available sauces: standard, 1000 islands, barbecue.");
             }
             this.sauce = sauce;
@@ -50,9 +53,9 @@ public final class Bigmac {
         }
 
         public BigmacBuilder ingredient(String ingredient) {
-            if (!availableIngredients.contains(ingredient)) {
+            if (!AVAILABLE_INGREDIENTS.contains(ingredient)) {
                 throw new IllegalStateException("No such an ingredient. Available ingredients: " +
-                        "salad, onion, bacon, shrimp, cheese, cucumber, chilli pepper, mushrooms");
+                        "salad, onion, bacon, shrimp, cheese, cucumber, chilli pepper, mushrooms.");
             }
             this.ingredients.add(ingredient);
             return this;
