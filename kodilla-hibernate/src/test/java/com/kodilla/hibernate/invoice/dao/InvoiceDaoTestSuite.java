@@ -38,37 +38,14 @@ public class InvoiceDaoTestSuite {
         Item item2 = new Item(product2, priceForProduct2, 1);
         Item item3 = new Item(product3, priceForProduct3, 8);
 
-
         Invoice invoice1 = new Invoice("abc123");
         invoice1.setItems(Arrays.asList(item1, item2, item3));
 
         //when
-        productDao.save(product1);
-        int product1Id = product1.getId();
-        productDao.save(product2);
-        int product2Id = product2.getId();
-        productDao.save(product3);
-        int product3Id = product3.getId();
-
-        itemDao.save(item1);
-        int item1Id = item1.getId();
-        itemDao.save(item2);
-        int item2Id = item2.getId();
-        itemDao.save(item3);
-        int item3Id = item3.getId();
-
         invoiceDao.save(invoice1);
         int invoice1Id = invoice1.getId();
 
         //then
-        Assert.assertNotEquals(0, product1Id);
-        Assert.assertNotEquals(0, product2Id);
-        Assert.assertNotEquals(0, product3Id);
-
-        Assert.assertNotEquals(0, item1Id);
-        Assert.assertNotEquals(0, item2Id);
-        Assert.assertNotEquals(0, item3Id);
-
         Assert.assertNotEquals(0, invoice1Id);
 
         //cleanup
