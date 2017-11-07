@@ -99,9 +99,7 @@ public class TaskListDaoTestSuite {
         task3.setTaskList(taskList);
         task4.setTaskList(taskList);
 
-        taskListDao.deleteAll();
-
-      /*  taskListDao.save(taskList);
+        taskListDao.save(taskList);
         int id = taskList.getId();
 
         //When
@@ -121,7 +119,5 @@ public class TaskListDaoTestSuite {
             //CleanUp
             taskListDao.delete(id);
         }
-*/
-
     }
 }
