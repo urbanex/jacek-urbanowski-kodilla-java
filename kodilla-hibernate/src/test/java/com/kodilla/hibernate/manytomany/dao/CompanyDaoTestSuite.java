@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.List;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class CompanyDaoTestSuite {
     @Autowired
     CompanyDao companyDao;
+    @Autowired
+    EmployeeDao employeeDao;
 
     @Test
     public void testSaveManyToMany(){
@@ -53,11 +57,64 @@ public class CompanyDaoTestSuite {
 
         //CleanUp
         try {
-                companyDao.delete(softwareMachineId);
-                companyDao.delete(dataMaestersId);
-                companyDao.delete(greyMatterId);
-            } catch (Exception e) {
-                //do nothing
-            }
+            companyDao.delete(softwareMachineId);
+            companyDao.delete(dataMaestersId);
+            companyDao.delete(greyMatterId);
+        } catch (Exception e) {
+            //do nothing
         }
     }
+
+    @Test
+    public void testFindByLastname() {
+        //given
+        Employee johnSmith = new Employee("John", "Smith");
+        Employee stephanieClarckson = new Employee("Stephanie", "Clarckson");
+        Employee lindaKovalsky = new Employee("Linda", "Kovalsky");
+
+        //when
+        employeeDao.save(johnSmith);
+        employeeDao.save(stephanieClarckson);
+        employeeDao.save(lindaKovalsky);
+        List<Employee> employees = employeeDao.findByLastname("Smith");
+
+        //then
+        Assert.assertEquals(1, employees.size());
+        Assert.assertEquals("Smith", employees.get(0).getLastname());
+
+        //cleanup
+        try {
+            employeeDao.delete(johnSmith);
+            employeeDao.delete(stephanieClarckson);
+            employeeDao.delete(lindaKovalsky);
+        } catch (Exception e) {
+        }
+    }
+
+    @Test
+    public void testFindByThreeCharsPrefix() {
+        //given
+        Company softwareMachine = new Company("Software Machine");
+        Company dataMaesters = new Company("Data Maesters");
+        Company greyMatter = new Company("Grey Matter");
+
+        //when
+        companyDao.save(softwareMachine);
+        companyDao.save(dataMaesters);
+        companyDao.save(greyMatter);
+        List<Company> companies = companyDao.findByThreeCharsPrefix("Dat");
+
+        //then
+        Assert.assertEquals(1, companies.size());
+        Assert.assertEquals("Data Maesters", companies.get(0).getName());
+
+        //cleanup
+        try {
+            companyDao.delete(softwareMachine);
+            companyDao.delete(dataMaesters);
+            companyDao.delete(greyMatter);
+        } catch (Exception e) {
+            //do nothing
+        }
+    }
+}
