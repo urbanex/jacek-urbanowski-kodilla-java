@@ -37,7 +37,7 @@ public class Item {
     }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "PRODUCT_ID")
+    @JoinColumn(name = "ID")
     public Product getProduct() {
         return product;
     }
@@ -47,7 +47,7 @@ public class Item {
     }
 
     @NotNull
-    @Column(name = "PRODUCT_PRICE")
+    @Column(name = "PRICE")
     public BigDecimal getPrice() {
         return price;
     }
@@ -57,7 +57,7 @@ public class Item {
     }
 
     @NotNull
-    @Column(name = "PRODUCT_QUANTITY")
+    @Column(name = "QUANTITY")
     public int getQuantity() {
         return quantity;
     }
@@ -67,7 +67,7 @@ public class Item {
     }
 
     @NotNull
-    @Column(name = "ITEM_VALUE")
+    @Column(name = "VALUE")
     public BigDecimal getValue() {
         return value;
     }
