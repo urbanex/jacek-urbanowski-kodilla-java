@@ -46,6 +46,9 @@ public class InvoiceDaoTestSuite {
         int invoice1Id = invoice1.getId();
 
         //then
+        Assert.assertEquals(3, productDao.count());
+        Assert.assertEquals(3, itemDao.count());
+        Assert.assertEquals(1, invoiceDao.count());
         Assert.assertNotEquals(0, invoice1Id);
 
         //cleanup
