@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class SpringRunnerTestSuite {
+public class KodillaSpringRunnerTestSuite {
 	@Test
 	public void testCircleLoadedIntoContainer() {
 		//Given
