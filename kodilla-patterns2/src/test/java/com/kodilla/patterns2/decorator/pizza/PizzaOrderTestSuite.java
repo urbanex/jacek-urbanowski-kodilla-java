@@ -9,26 +9,6 @@ import static org.junit.Assert.assertEquals;
 public class PizzaOrderTestSuite {
 
     @Test
-    public void testBasicPizzaOrderGetCost() {
-        //given
-        PizzaOrder theOrder = new BasicPizzaOrder();
-        //when
-        BigDecimal calculatedCost = theOrder.getCost();
-        //then
-        assertEquals(new BigDecimal(15), calculatedCost);
-    }
-
-    @Test
-    public void testBasicPizzaOrderGetDescription() {
-        //given
-        PizzaOrder theOrder = new BasicPizzaOrder();
-        //when
-        String description = theOrder.getDescription();
-        //then
-        assertEquals("Ordered pizza:\n", description);
-    }
-
-    @Test
     public void testThinCrustTomatoSauceHamMushroomsPizzaGetCost() {
         //given
         PizzaOrder theOrder = new BasicPizzaOrder();
@@ -41,6 +21,7 @@ public class PizzaOrderTestSuite {
         BigDecimal calculatedCost = theOrder.getCost();
         //then
         assertEquals(new BigDecimal(26), calculatedCost);
+        System.out.println("Ordered pizza price: " + calculatedCost);
     }
 
     @Test
@@ -55,12 +36,13 @@ public class PizzaOrderTestSuite {
         //when
         String description = theOrder.getDescription();
         //then
-        assertEquals("Ordered pizza:\n" +
+        assertEquals("Ordered pizza description:\n" +
                 "  - thin-crust\n" +
                 "  - tomato sauce\n" +
                 "  - cheese\n" +
                 "  - ham\n" +
                 "  - mushrooms\n", description);
+        System.out.println(description);
     }
 
     @Test
@@ -78,6 +60,7 @@ public class PizzaOrderTestSuite {
         BigDecimal calculatedCost = theOrder.getCost();
         //then
         assertEquals(new BigDecimal(35), calculatedCost);
+        System.out.println("Ordered pizza price: " + calculatedCost);
     }
 
     @Test
@@ -94,7 +77,7 @@ public class PizzaOrderTestSuite {
         //when
         String description = theOrder.getDescription();
         //then
-        assertEquals("Ordered pizza:\n" +
+        assertEquals("Ordered pizza description:\n" +
                 "  - thick-crust\n" +
                 "  - BBQ sauce\n" +
                 "  - cheese\n" +
@@ -102,5 +85,6 @@ public class PizzaOrderTestSuite {
                 "  - ham\n" +
                 "  - mushrooms\n" +
                 "  - onion\n", description);
+        System.out.println(description);
     }
 }
