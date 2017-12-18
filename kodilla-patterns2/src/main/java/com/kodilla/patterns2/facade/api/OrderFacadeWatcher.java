@@ -14,7 +14,7 @@ public class OrderFacadeWatcher {
 
     @Before("execution(* com.kodilla.patterns2.facade.api.OrderFacade.processOrder(..))")
     public void logEventBefore() {
-        LOGGER.info("PROCESSING ORDER IN PROGRESS...");
+        LOGGER.info("WATCHER: PROCESSING ORDER IN PROGRESS...");
     }
 
     @Around("execution(* com.kodilla.patterns2.facade.api.OrderFacade.processOrder(..))")
