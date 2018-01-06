@@ -12,7 +12,7 @@ public class StoredProcTestSuite {
 
     @Test
     public void testUpdateVipLevels() throws SQLException {
-        //gien
+        //given
         DbManager dbManager = DbManager.getInstance();
         String sqlUpdate = "UPDATE READERS SET VIP_LEVEL=\"Not set\"";
         Statement statement = dbManager.getConnection().createStatement();
@@ -33,7 +33,7 @@ public class StoredProcTestSuite {
 
     @Test
     public void testUpdateBestsellers() throws SQLException {
-        //gien
+        //given
         DbManager dbManager = DbManager.getInstance();
         String sqlUpdate = "UPDATE BOOKS SET BESTSELLER = NULL";
         Statement statement = dbManager.getConnection().createStatement();
@@ -42,7 +42,7 @@ public class StoredProcTestSuite {
         String sqlProcedureCall = "CALL UpdateBestsellers()";
         statement.execute(sqlProcedureCall);
         //then
-        String sqlCheckTable = "SELECT COUNT(*) AS HOW_MANY FROM BOOKS WHERE BESTSELLER=NULL";
+        String sqlCheckTable = "SELECT COUNT(*) AS HOW_MANY FROM BOOKS WHERE BESTSELLER IS NULL";
         ResultSet rs = statement.executeQuery(sqlCheckTable);
         int howMany = -1;
         if (rs.next()) {
