@@ -23,4 +23,3 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-/kodilla-testing2/src/main/java/com/kodilla/testing2/config/TrelloAdminCredentials.java
